@@ -32,6 +32,8 @@ public class ChatController {
     if (room != null) {
       room.getMessages().add(msg);
       repositories.save(room);
+    } else {
+      throw new RuntimeException("Room not found");
     }
     return msg;
   }
