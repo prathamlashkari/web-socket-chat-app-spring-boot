@@ -1,3 +1,5 @@
+import chatIcon from "../asset/chat.png";
+
 const JoinCreateChat = () => {
   return (
     <div className="min-h-screen flex items-center justify-center ">
@@ -15,8 +17,8 @@ const JoinCreateChat = () => {
             Your name
           </label>
           <input
-            onChange={handleFormInputChange}
-            value={detail.userName}
+            // onChange={handleFormInputChange}
+            // value={detail.userName}
             type="text"
             id="name"
             name="userName"
@@ -32,8 +34,8 @@ const JoinCreateChat = () => {
           </label>
           <input
             name="roomId"
-            onChange={handleFormInputChange}
-            value={detail.roomId}
+            // onChange={handleFormInputChange}
+            // value={detail.roomId}
             type="text"
             id="name"
             placeholder="Enter the room id"
@@ -44,13 +46,13 @@ const JoinCreateChat = () => {
         {/* button  */}
         <div className="flex justify-center gap-2 mt-4">
           <button
-            onClick={joinChat}
+            // onClick={joinChat}
             className="px-3 py-2 dark:bg-blue-500 hover:dark:bg-blue-800 rounded-full"
           >
             Join Room
           </button>
           <button
-            onClick={createRoom}
+            // onClick={createRoom}
             className="px-3 py-2 dark:bg-orange-500 hover:dark:bg-orange-800 rounded-full"
           >
             Create Room
