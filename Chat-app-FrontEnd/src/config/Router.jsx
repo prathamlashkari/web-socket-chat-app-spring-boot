@@ -5,8 +5,8 @@ import JoinCreateChat from "../component/JoinCreateChat.jsx";
 const Router = () => {
   return (
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/chat" element={<JoinCreateChat />} />
+      <Route path="/" element={<JoinCreateChat />} />
+      <Route path="/chat" element={<h1>This is chat page</h1>} />
     </Routes>
   );
 };
