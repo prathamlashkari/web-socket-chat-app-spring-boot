@@ -7,6 +7,14 @@ const JoinCreateChat = () => {
     userName: "",
   });
 
+  function validateForm() {
+    if (detail.roomId === "" || detail.userName === "") {
+      alert.error("Invalid Input !!");
+      return false;
+    }
+    return true;
+  }
+
   function handleFormInputChange(event) {
     setDetail({
       ...detail,
@@ -47,8 +55,8 @@ const JoinCreateChat = () => {
           </label>
           <input
             name="roomId"
-            // onChange={handleFormInputChange}
-            // value={detail.roomId}
+            onChange={handleFormInputChange}
+            value={detail.roomId}
             type="text"
             id="name"
             placeholder="Enter the room id"
