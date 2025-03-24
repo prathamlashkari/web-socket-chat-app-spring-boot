@@ -1,6 +1,28 @@
+import { useState } from "react";
 import chatIcon from "../asset/chat.png";
+import toast from "react-hot-toast";
 
 const JoinCreateChat = () => {
+  const [detail, setDetail] = useState({
+    roomId: "",
+    userName: "",
+  });
+
+  function validateForm() {
+    if (detail.roomId === "" || detail.userName === "") {
+      toast.error("Invalid Input !!");
+      return false;
+    }
+    return true;
+  }
+
+  function handleFormInputChange(event) {
+    setDetail({
+      ...detail,
+      [event.target.name]: event.target.value,
+    });
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center ">
       <div className="p-10 dark:border-gray-700 border w-full flex flex-col gap-5 max-w-md rounded dark:bg-gray-900 shadow">
@@ -17,8 +39,8 @@ const JoinCreateChat = () => {
             Your name
           </label>
           <input
-            // onChange={handleFormInputChange}
-            // value={detail.userName}
+            onChange={handleFormInputChange}
+            value={detail.userName}
             type="text"
             id="name"
             name="userName"
@@ -34,8 +56,8 @@ const JoinCreateChat = () => {
           </label>
           <input
             name="roomId"
-            // onChange={handleFormInputChange}
-            // value={detail.roomId}
+            onChange={handleFormInputChange}
+            value={detail.roomId}
             type="text"
             id="name"
             placeholder="Enter the room id"
