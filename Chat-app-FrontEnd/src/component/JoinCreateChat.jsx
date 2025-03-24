@@ -1,12 +1,15 @@
 import { useState } from "react";
 import chatIcon from "../asset/chat.png";
 import toast from "react-hot-toast";
+import { createRoomApi } from "../service/RoomService";
+import { useNavigate } from "react-router";
 
 const JoinCreateChat = () => {
   const [detail, setDetail] = useState({
     roomId: "",
     userName: "",
   });
+  const navigate = useNavigate();
 
   function validateForm() {
     if (detail.roomId === "" || detail.userName === "") {
@@ -21,6 +24,30 @@ const JoinCreateChat = () => {
       ...detail,
       [event.target.name]: event.target.value,
     });
+  }
+  async function createRoom() {
+    if (validateForm()) {
+      //create room
+      console.log(detail);
+      // call api to create room on backend
+      try {
+        const response = await createRoomApi(detail.roomId);
+        console.log(response);
+        toast.success("Room Created Successfully !!");
+        setCurrentUser(detail.userName);
+        setRoomId(response.roomId);
+        setConnected(true);
+
+        navigate("/chat");
+      } catch (error) {
+        console.log(error);
+        if (error.status == 400) {
+          toast.error("Room  already exists !!");
+        } else {
+          toast("Error in creating room");
+        }
+      }
+    }
   }
 
   return (
