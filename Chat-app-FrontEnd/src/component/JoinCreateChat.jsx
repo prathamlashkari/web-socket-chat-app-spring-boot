@@ -3,12 +3,16 @@ import chatIcon from "../asset/chat.png";
 import toast from "react-hot-toast";
 import { createRoomApi } from "../service/RoomService";
 import { useNavigate } from "react-router";
+import useChatContext from "../context/ChatContext";
 
 const JoinCreateChat = () => {
   const [detail, setDetail] = useState({
     roomId: "",
     userName: "",
   });
+
+  const { roomId, userName, setRoomId, setCurrentUser, setConnected } =
+    useChatContext();
   const navigate = useNavigate();
 
   function validateForm() {
