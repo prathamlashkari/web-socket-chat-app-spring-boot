@@ -13,7 +13,7 @@ const JoinCreateChat = () => {
 
   function validateForm() {
     if (detail.roomId === "" || detail.userName === "") {
-      // toast.error("Invalid Input !!");
+      toast.error("Invalid Input !!");
       return false;
     }
     return true;
@@ -33,18 +33,17 @@ const JoinCreateChat = () => {
       try {
         const response = await createRoomApi(detail.roomId);
         console.log(response);
-        // toast.success("Room Created Successfully !!");
+        toast.success("Room Created Successfully !!");
         setCurrentUser(detail.userName);
         setRoomId(response.roomId);
         setConnected(true);
-
         navigate("/chat");
       } catch (error) {
         console.log(error);
         if (error.status == 400) {
-          // toast.error("Room  already exists !!");
+          toast.error("Room  already exists !!");
         } else {
-          // toast("Error in creating room");
+          toast("Error in creating room");
         }
       }
     }
