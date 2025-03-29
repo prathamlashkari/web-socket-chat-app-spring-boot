@@ -1,6 +1,6 @@
 import { useState } from "react";
 import chatIcon from "../asset/chat.png";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { createRoomApi } from "../service/RoomService";
 import { useNavigate } from "react-router";
 
@@ -13,7 +13,7 @@ const JoinCreateChat = () => {
 
   function validateForm() {
     if (detail.roomId === "" || detail.userName === "") {
-      toast.error("Invalid Input !!");
+      // toast.error("Invalid Input !!");
       return false;
     }
     return true;
@@ -33,7 +33,7 @@ const JoinCreateChat = () => {
       try {
         const response = await createRoomApi(detail.roomId);
         console.log(response);
-        toast.success("Room Created Successfully !!");
+        // toast.success("Room Created Successfully !!");
         setCurrentUser(detail.userName);
         setRoomId(response.roomId);
         setConnected(true);
@@ -42,9 +42,9 @@ const JoinCreateChat = () => {
       } catch (error) {
         console.log(error);
         if (error.status == 400) {
-          toast.error("Room  already exists !!");
+          // toast.error("Room  already exists !!");
         } else {
-          toast("Error in creating room");
+          // toast("Error in creating room");
         }
       }
     }
@@ -101,7 +101,7 @@ const JoinCreateChat = () => {
             Join Room
           </button>
           <button
-            // onClick={createRoom}
+            onClick={createRoom}
             className="px-3 py-2 dark:bg-orange-500 hover:dark:bg-orange-800 rounded-full"
           >
             Create Room

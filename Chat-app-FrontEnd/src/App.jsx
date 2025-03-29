@@ -1,7 +1,11 @@
+import JoinCreateChat from "./component/JoinCreateChat";
+
 function App() {
   return (
     <>
-      <div>App</div>
+      <div>
+        <JoinCreateChat />
+      </div>
     </>
   );
 }
