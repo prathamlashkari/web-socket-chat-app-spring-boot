@@ -1,12 +1,29 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdAttachFile, MdSend } from "react-icons/md";
+import useChatContext from "../context/ChatContext";
+import { useNavigate } from "react-router";
 
 const ChatPage = () => {
+  const {
+    roomId,
+    currentUser,
+    connected,
+    setConnected,
+    setRoomId,
+    setCurrentUser,
+  } = useChatContext();
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const inputRef = useRef(null);
   const chatBoxRef = useRef(null);
   const [stompClient, setStompClient] = useState(null);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!connected) {
+      navigate("/");
+    }
+  }, [connected, roomId, currentUser]);
   return (
     <div className="">
       {" "}
@@ -15,14 +32,14 @@ const ChatPage = () => {
         {/* room name container */}
         <div>
           <h1 className="text-xl font-semibold">
-            {/* Room : <span>{roomId}</span> */}
+            Room : <span>{roomId}</span>
           </h1>
         </div>
         {/* username container */}
 
         <div>
           <h1 className="text-xl font-semibold">
-            {/* User : <span>{currentUser}</span> */}
+            User : <span>{currentUser}</span>
           </h1>
         </div>
         {/* button: leave room */}
