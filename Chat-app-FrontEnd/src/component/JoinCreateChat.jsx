@@ -116,7 +116,7 @@ const JoinCreateChat = () => {
         {/* button  */}
         <div className="flex justify-center gap-2 mt-4">
           <button
-            // onClick={joinChat}
+            onClick={joinChat}
             className="px-3 py-2 dark:bg-blue-500 hover:dark:bg-blue-800 rounded-full"
           >
             Join Room

@@ -39,10 +39,12 @@ public class RoomController {
 
   @GetMapping("/{roomId}")
   public ResponseEntity<?> getRoomById(@PathVariable String roomId) {
+    System.out.println(roomId);
     Room room = repositories.findByRoomId(roomId);
+    System.out.println(room);
     if (room == null)
       return new ResponseEntity<>("Room not found", HttpStatus.BAD_REQUEST);
-    return new ResponseEntity<>(room, HttpStatus.FOUND);
+    return new ResponseEntity<>(room, HttpStatus.OK);
   }
 
   @GetMapping("/{roomId}/messages")
