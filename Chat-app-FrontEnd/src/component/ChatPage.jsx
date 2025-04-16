@@ -57,6 +57,27 @@ const ChatPage = () => {
     //stomp client
   }, [roomId]);
 
+  const sendMessage = async () => {
+    if (stompClient && connected && input.trim()) {
+      console.log(input);
+
+      const message = {
+        sender: currentUser,
+        content: input,
+        roomId: roomId,
+      };
+
+      stompClient.send(
+        `/app/sendMessage/${roomId}`,
+        {},
+        JSON.stringify(message)
+      );
+      setInput("");
+    }
+
+    //
+  };
+
   return (
     <div className="">
       {" "}
