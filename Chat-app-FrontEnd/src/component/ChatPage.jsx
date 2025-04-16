@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdAttachFile, MdSend } from "react-icons/md";
 import useChatContext from "../context/ChatContext";
 import { useNavigate } from "react-router";
-
+import { baseURL } from "../config/AxiosHelper";
+import SockJS from "sockjs-client";
+import { Stomp } from "@stomp/stompjs";
 const ChatPage = () => {
   const {
     roomId,
@@ -24,6 +26,58 @@ const ChatPage = () => {
       navigate("/");
     }
   }, [connected, roomId, currentUser]);
+
+  //stompClient ko init karne honge
+  //subscribe
+
+  useEffect(() => {
+    const connectWebSocket = () => {
+      const sock = new SockJS(`${baseURL}/chat`);
+      const client = Stomp.over(sock);
+
+      client.connect({}, () => {
+        setStompClient(client);
+
+        toast.success("connected");
+
+        client.subscribe(`/topic/room/${roomId}`, (message) => {
+          console.log(message);
+
+          const newMessage = JSON.parse(message.body);
+
+          setMessages((prev) => [...prev, newMessage]);
+        });
+      });
+    };
+
+    if (connected) {
+      connectWebSocket();
+    }
+
+    //stomp client
+  }, [roomId]);
+
+  const sendMessage = async () => {
+    if (stompClient && connected && input.trim()) {
+      console.log(input);
+
+      const message = {
+        sender: currentUser,
+        content: input,
+        roomId: roomId,
+      };
+
+      stompClient.send(
+        `/app/sendMessage/${roomId}`,
+        {},
+        JSON.stringify(message)
+      );
+      setInput("");
+    }
+
+    //
+  };
+
   return (
     <div className="">
       {" "}
