@@ -3,7 +3,8 @@ import { MdAttachFile, MdSend } from "react-icons/md";
 import useChatContext from "../context/ChatContext";
 import { useNavigate } from "react-router";
 import { baseURL } from "../config/AxiosHelper";
-
+import SockJS from "sockjs-client";
+import { Stomp } from "@stomp/stompjs";
 const ChatPage = () => {
   const {
     roomId,
